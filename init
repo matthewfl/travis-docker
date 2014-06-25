@@ -1,5 +1,7 @@
 #!/bin/sh
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+set -e -x  # fail early
+
 mount -t tmpfs none /tmp
 mount -t tmpfs none /var/run
 #mount -t hostfs -o $LOGDIR none /var/log
@@ -12,6 +14,8 @@ mkdir /dev/shm
 mount -t tmpfs none /dev/shm
 mount -t sysfs sysfs /sys
 mount -t tmpfs none /sys/fs/cgroup
+mkdir /tmp/host
+mount -t hostfs -o /tmp/travis-docker/ node /tmp/host
 for SUBSYS in memory devices cpuset
 do
 		mkdir /sys/fs/cgroup/$SUBSYS
@@ -23,10 +27,14 @@ ip addr add 127.0.0.1 dev lo
 ip link set lo up
 ip addr add 10.0.2.15/24 dev eth0
 ip link set eth0 up
-echo 'nameserver 10.0.2.3' > /etc/resolv.conf
+#echo 'nameserver 10.0.2.3' > /etc/resolv.conf
 ip route add default via 10.0.2.2
 
-bash
+/tmp/host/docker -d -H=tcp://0.0.0.0:4323
+
+#/tmp/travis-docker/docker -d -H=tcp://0.0.0.0:9000
+
+#bash
 
 #ip addr add 10.1.1.1/24 dev eth0
 #ip link set eth0 up

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-PORT=25483
-
-#apt-get install -y slirp
+PORT=4323
 
 mkdir -p /tmp/travis-docker
 
@@ -11,10 +9,12 @@ cp init /tmp/travis-docker
 cp slirp-fullbolt /tmp/travis-docker/
 chmod +x /tmp/travis-docker/init
 chmod +x /tmp/travis-docker/docker
-chmod +x /tmp/travis-docker/slirp-fullbot
+chmod +x /tmp/travis-docker/slirp-fullbolt
+
+echo -e '#!/bin/bash\nexec /tmp/travis-docker/slirp-fullbolt "redir 4323 4323"' > /tmp/travis-docker/slirp-cmd
+chmod +x /tmp/travis-docker/slirp-cmd
+
 
 ./uml quiet mem=2560M rootfstype=hostfs rootflags=/ ro \
-		eth0=slirp,,/tmp/travis-docker/slirp-fullbolt \
+		eth0=slirp,,/tmp/travis-docker/slirp-cmd \
 		init=/tmp/travis-docker/init
-
-echo 'hello world'
