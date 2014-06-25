@@ -1,0 +1,4 @@
+uml
+docker
+pkg/
+travis-docker.run

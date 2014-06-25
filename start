@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PORT=25483
+
+mkdir -p /tmp/travis-docker
+
+cp docker /tmp/travis-docker
+cp init /tmp/travis-docker
+chmod +x /tmp/travis-docker/init
+chmod +x /tmp/travis-docker/docker
+
+./uml quiet mem=2560M rootfstype=hostfs rootflags=/tmp/travis-docker/ ro \
+		eth0=slirp,,tcp:$PORT:9000 \
+		init=/tmp/travis-docker/init
+
+echo 'hello world'

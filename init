@@ -1,15 +1,17 @@
 #!/bin/sh
+bash
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 mount -t tmpfs none /tmp
 mount -t tmpfs none /var/run
-mount -t hostfs -o $LOGDIR none /var/log
+#mount -t hostfs -o $LOGDIR none /var/log
+mount -t tmpfs non /var/log
 mount -t tmpfs none /var/lib/docker
-mount -t proc none /proc
+mount -t proc proc /proc
 mkdir /dev/pts
-mount -t devpts none /dev/pts
+mount -t devpts devpts /dev/pts
 mkdir /dev/shm
 mount -t tmpfs none /dev/shm
-mount -t sysfs none /sys
+mount -t sysfs sysfs /sys
 mount -t tmpfs none /sys/fs/cgroup
 for SUBSYS in memory devices cpuset
 do
@@ -34,8 +36,11 @@ ip route add default via 10.1.1.254
 	exec >>/var/log/output
 	exec 2>>/var/log/output
 }
-sh /var/log/cmd
-echo $? >/var/log/status
+bash
+#docker -d -H=tcp://0.0.0.0:9000
+#sleep 2h
+#sh /var/log/cmd
+# echo $? >/var/log/status
 # This will make sure that the main "tail" process had the opportunity
 # to display everything before being killed by UML misbehavior.
-sleep 1
+#sleep 1
