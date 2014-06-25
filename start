@@ -2,15 +2,19 @@
 
 PORT=25483
 
+#apt-get install -y slirp
+
 mkdir -p /tmp/travis-docker
 
 cp docker /tmp/travis-docker
 cp init /tmp/travis-docker
+cp slirp-fullbolt /tmp/travis-docker/
 chmod +x /tmp/travis-docker/init
 chmod +x /tmp/travis-docker/docker
+chmod +x /tmp/travis-docker/slirp-fullbot
 
-./uml quiet mem=2560M rootfstype=hostfs rootflags=/tmp/travis-docker/ ro \
-		eth0=slirp,,tcp:$PORT:9000 \
+./uml quiet mem=2560M rootfstype=hostfs rootflags=/ ro \
+		eth0=slirp,,/tmp/travis-docker/slirp-fullbolt \
 		init=/tmp/travis-docker/init
 
 echo 'hello world'

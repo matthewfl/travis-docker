@@ -1,5 +1,4 @@
 #!/bin/sh
-bash
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 mount -t tmpfs none /tmp
 mount -t tmpfs none /var/run
