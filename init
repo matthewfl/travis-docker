@@ -15,7 +15,7 @@ mount -t tmpfs none /dev/shm
 mount -t sysfs sysfs /sys
 mount -t tmpfs none /sys/fs/cgroup
 mkdir /tmp/host
-mount -t hostfs -o /tmp/travis-docker/ node /tmp/host
+mount -t hostfs -o /tmp/travis-docker/ none /tmp/host
 for SUBSYS in memory devices cpuset
 do
 		mkdir /sys/fs/cgroup/$SUBSYS

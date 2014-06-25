@@ -16,6 +16,9 @@ chmod +x /tmp/travis-docker/slirp-fullbolt
 echo -e '#!/bin/bash\nexec /tmp/travis-docker/slirp-fullbolt "redir 4323 4323"' > /tmp/travis-docker/slirp-cmd
 chmod +x /tmp/travis-docker/slirp-cmd
 
+ln -s /usr /tmp/travis-docker/usr
+ln -s /proc /tmp/travis-docker/proc
+
 
 ./uml quiet mem=2G rootfstype=hostfs rootflags=/ ro \
 		eth0=slirp,,/tmp/travis-docker/slirp-cmd \

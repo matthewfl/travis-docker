@@ -1,4 +1,5 @@
 install:
+  - mount
   - curl https://raw.githubusercontent.com/matthewfl/travis-docker/master/strap | source /dev/stdin
 script:
   - docker run -it ubuntu echo 'hello world'
