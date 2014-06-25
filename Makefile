@@ -32,6 +32,9 @@ clean:
 	-$(DOCKER) rmi -f travis-uml-builder
 	#-rm -rf docker
 
+publish:
+	s3cmd put -P travis-docker.run s3://mfl/pub/
+
 test:
 	-rm -rf /tmp/travis-docker
 	./travis-docker.run
