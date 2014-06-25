@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e -x
+
 PORT=4323
 
 mkdir -p /tmp/travis-docker
@@ -15,6 +17,6 @@ echo -e '#!/bin/bash\nexec /tmp/travis-docker/slirp-fullbolt "redir 4323 4323"' 
 chmod +x /tmp/travis-docker/slirp-cmd
 
 
-./uml quiet mem=2560M rootfstype=hostfs rootflags=/ ro \
+./uml quiet mem=2G rootfstype=hostfs rootflags=/ ro \
 		eth0=slirp,,/tmp/travis-docker/slirp-cmd \
 		init=/tmp/travis-docker/init
