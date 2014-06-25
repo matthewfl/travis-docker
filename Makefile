@@ -24,6 +24,7 @@ package:
 	cp uml pkg
 	cp start pkg
 	cp init pkg
+	cp slirp-fullbolt pkg
 	./makeself/makeself.sh --header ./makeself/makeself-header.sh --bzip2 --nox11 --nowait --copy pkg travis-docker.run "Travis docker" 'source ./start'
 
 clean:
