@@ -1,4 +1,4 @@
 install:
-  - curl bit.ly/travis-docker | source
+  - curl https://raw.githubusercontent.com/matthewfl/travis-docker/master/strap | source
 script:
   - docker run -it ubuntu echo 'hello world'

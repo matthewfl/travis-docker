@@ -4,6 +4,10 @@ set -e
 
 curl http://mfl.s3.amazonaws.com/pub/travis-docker.run > /tmp/travis-docker.run
 chmod +x /tmp/travis-docker.run
-/tmp/travis-docker.run
+/tmp/travis-docker.run &
+
+sleep 10s
 
 export PATH=$PATH:/tmp/travis-docker/
+
+alias docker="docker -H=tcp://127.0.0.1:4323"
