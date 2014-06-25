@@ -9,14 +9,13 @@ mkdir -p /tmp/travis-docker
 cp docker /tmp/travis-docker
 cp init /tmp/travis-docker
 cp slirp-fullbolt /tmp/travis-docker/
+cp slirp-cmd /tmp/travis-docker/
 chmod +x /tmp/travis-docker/init
 chmod +x /tmp/travis-docker/docker
 chmod +x /tmp/travis-docker/slirp-fullbolt
-
-echo -e '#!/bin/bash\nexec /tmp/travis-docker/slirp-fullbolt "redir 4323 4323"' > /tmp/travis-docker/slirp-cmd
 chmod +x /tmp/travis-docker/slirp-cmd
 
 
-./uml quiet mem=2G rootfstype=hostfs rootflags=/ ro
-#		eth0=slirp,,/tmp/travis-docker/slirp-cmd \
-#		init=/tmp/travis-docker/init verbose
+./uml mem=2G rootfstype=hostfs rootflags=/ ro \
+		eth0=slirp,,/tmp/travis-docker/slirp-cmd \
+		init=/tmp/travis-docker/init verbose

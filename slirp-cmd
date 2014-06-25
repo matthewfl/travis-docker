@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /tmp/travis-docker/slirp-fullbolt "redir 4323 4323"
