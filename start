@@ -2,7 +2,7 @@
 
 set -e -x
 
-PORT=4323
+PORT=2375
 
 mkdir -p /tmp/travis-docker
 
