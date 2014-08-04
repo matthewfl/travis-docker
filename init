@@ -32,7 +32,7 @@ ip link set eth0 up
 #echo 'nameserver 10.0.2.3' > /etc/resolv.conf
 ip route add default via 10.0.2.2
 
-/tmp/host/docker -d -H=tcp://0.0.0.0:4323
+/tmp/host/docker -d -H=tcp://0.0.0.0:2375
 
 #/tmp/travis-docker/docker -d -H=tcp://0.0.0.0:9000
 
